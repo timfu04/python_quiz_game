@@ -1,0 +1,11 @@
+ques,opt_1,opt_2,opt_3,opt_4,ans
+"Stores a piece of data, and gives it a specific name.",variable,interpreter,whitespace,modulus,variable
+Returns the remainder from division.,boolean,modulus,exponents,variables,modulus
+Surrounds multi-line comments.,**,#,%,"""""""",""""""""
+A line of text that Python won't try to run as code.,variable,comment,modulus,boolean,comment
+Symbol used for modulus,%,#,&,**,%
+A data type than can have one of two values: True or False,boolean,modulus,variable,interpreter,boolean
+Used to make comments,(),**,%,#,#
+The correct way to write a variable in Python?,myVariable is 10,my Variable = 10,myVariable = 10,myVariable: 10,myVariable = 10
+"A data type consisting of numbers, letters and symbols.",Integer,Float,String,boolean,String
+Which Python command is used to output information to the screen?,read,print,output,display,print
