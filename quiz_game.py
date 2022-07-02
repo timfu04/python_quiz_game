@@ -1,30 +1,53 @@
 import sys
 import csv
+import os
+import time
+import inspect
 
-def main():
-    print(f"{'#'*25} Welcome to Python Quiz Game! {'#'*25}\n")
+
+
+
+
+def read_csv():
+    pass
     
+
+def clear_screen():
+    time.sleep(0.75)
+    os.system("cls")
+    time.sleep(0.25)    
+
+def main ():
+    welcome_msg = f"""
+    {"#"*50}
+    ##{" "*46}##
+    ##{" "*9}Welcome to Python Quiz Game!{" "*9}##
+    ##{" "*46}##
+    {"#"*50}
+    """   
+    welcome_msg = inspect.cleandoc(welcome_msg)
+    print(welcome_msg,'\n')
+    
+    invalid_input_msg = "INVALID INPUT. PLEASE TRY AGAIN."
     while True:
-        play_input = input(f"{'#'*10} Do you want to start the game? (Y/N) {'#'*10}\n").lower()
+        play_input = input("Do you want to start the game (Y/N)?\n").lower()
         if play_input.isalpha(): # if all the characters are alphabet letters
             if play_input in ["yes","y"]:
                 break
-            else:
+            elif play_input in ["no",'n']:
+                print("quit game")
                 sys.exit()
+            else:
+                print(invalid_input_msg)
+                clear_screen()
         else:
-            print(f"{'#'*10} Invalid input. Please try again. {'#'*10}\n")
-    
+            print(invalid_input_msg)
+            clear_screen()
+           
+            
 
 
-        
-    
-    
-    
-    
-        
-        
 
-        
 # use init for every code?
 # 10 questions
 # ask whether player wanna start the quiz?
