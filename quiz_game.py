@@ -3,21 +3,18 @@ import csv
 import os
 import time
 import inspect
+import random
 
 
-
-
-
-def read_csv():
-    pass
     
 
-def clear_screen():
-    time.sleep(0.75)
+def clear_screen(t1, t2):
+    time.sleep(t1)
     os.system("cls")
-    time.sleep(0.25)    
+    time.sleep(t2)    
 
 def main ():
+    clear_screen(0, 0.25)
     welcome_msg = f"""
     {"#"*50}
     ##{" "*46}##
@@ -39,35 +36,77 @@ def main ():
                 sys.exit()
             else:
                 print(invalid_input_msg)
-                clear_screen()
+                clear_screen(0.75, 0.25)
         else:
             print(invalid_input_msg)
-            clear_screen()
+            clear_screen(0.75, 0.25)
            
-            
+def timer_in_secs(s : int) -> bool:
+    '''
+    Countdown timer in seconds.
+    '''
+    timer_ended = False
+    while s:
+        print(f"00:{s:02}", end="\r")
+        time.sleep(1)
+        s -= 1
+        if s == 0:
+            timer_ended = True
+    return timer_ended
+
+def print_msg_box(msg : str, index : int):
+    '''
+    Print message with box
+    '''
+    padding = 1
+    space = " " * padding
+    title = f"Question {index}"
+    lines = msg.split("\n")
+    length = max(map(len, lines))
+    
+    box = f"╔{'═'*(length + padding * 2)}╗\n" # top border
+    box += f"║{space}\033[1m{title:<{length}}\033[0m{space}║\n" # title
+    box += f'║{space}{"-" * len(title):<{length}}{space}║\n'  # title underscore
+    box += "".join([f"║{space}{line:<{length}}{space}║\n" for line in lines]) # content
+    box += f"╚{'═'*(length + padding * 2)}╝\n" # bottom border
+    print(box)
 
 
 
-# use init for every code?
-# 10 questions
-# ask whether player wanna start the quiz?
-# 30 secs timer for each questions or skip to next questions
+
+def display_ques(csv_data: list):
+    '''
+    Shuffle and display questions.
+    '''
+    random.shuffle(csv_data)
+    
+    for index, data in enumerate(csv_data):
+        print(data)
+        print(len(data["question"]))
+
+    
+    
+    
+    
+    
 
 
 
 if __name__ == '__main__':
     main()
     
-    print("Proceed to play game, happy happy")
-    
-    # with open("dataset/quiz_game_dataset.csv", "r") as csv_file:
-    #     csv_obj = csv.reader(csv_file)
+    # Read dataset into list of dictionaries 
+    csv_data_list = []
+    with open("dataset/quiz_game_dataset.csv", "r") as csv_file:
+        csv_obj = csv.DictReader(csv_file)
         
-    #     for i in csv_obj:
-    #         pass
-    #         print(i)
-    #         print(type(i))
+        for data in csv_obj:
+            csv_data_list.append({"question":data["ques"], "options":[data["opt_1"], data["opt_2"], data["opt_3"], data["opt_4"]], "answer":data["ans"]})
             
-
-# testing second push
-
+            
+    print(type(csv_data_list))
+    
+    
+    display_ques(csv_data_list)
+                                  
+                                   
