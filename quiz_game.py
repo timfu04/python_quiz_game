@@ -5,16 +5,13 @@ import time
 import inspect
 import random
 
-
-    
-
-def clear_screen(t1, t2):
-    time.sleep(t1)
+def clear_screen(s1 : int, s2 : int):
+    time.sleep(s1)
     os.system("cls")
-    time.sleep(t2)    
-
+    time.sleep(s2)
+    
 def main ():
-    clear_screen(0, 0.25)
+    clear_screen(0, 0.1)
     welcome_msg = f"""
     {"#"*50}
     ##{" "*46}##
@@ -25,7 +22,7 @@ def main ():
     welcome_msg = inspect.cleandoc(welcome_msg)
     print(welcome_msg,'\n')
     
-    invalid_input_msg = "INVALID INPUT. PLEASE TRY AGAIN."
+    invalid_input_msg = "\033[1mINVALID INPUT. PLEASE TRY AGAIN.\033[0m"
     while True:
         play_input = input("Do you want to start the game (Y/N)?\n").lower()
         if play_input.isalpha(): # if all the characters are alphabet letters
@@ -41,13 +38,13 @@ def main ():
             print(invalid_input_msg)
             clear_screen(0.75, 0.25)
            
-def timer_in_secs(s : int) -> bool:
+def timer_in_secs(s : int, length : int, padding : int) -> bool:
     '''
     Countdown timer in seconds.
     '''
     timer_ended = False
     while s:
-        print(f"00:{s:02}", end="\r")
+        print(f"{f'00:{s:02}':^{length + padding * 2}}", end="\r")
         time.sleep(1)
         s -= 1
         if s == 0:
@@ -68,8 +65,9 @@ def print_msg_box(msg : str, index : int):
     box += f"║{space}\033[1m{title:<{length}}\033[0m{space}║\n" # title
     box += f'║{space}{"-" * len(title):<{length}}{space}║\n'  # title underscore
     box += "".join([f"║{space}{line:<{length}}{space}║\n" for line in lines]) # content
-    box += f"╚{'═'*(length + padding * 2)}╝\n" # bottom border
+    box += f"╚{'═'*(length + padding * 2)}╝" # bottom border
     print(box)
+    return length, padding
 
 
 
@@ -79,16 +77,18 @@ def display_ques(csv_data: list):
     Shuffle and display questions.
     '''
     random.shuffle(csv_data)
+    clear_screen(0, 0)
     
     for index, data in enumerate(csv_data):
-        print(data)
-        print(len(data["question"]))
+        length, padding = print_msg_box(data["question"], index + 1)
+        timer_in_secs(10, length, padding)
+        clear_screen(0, 1)
+        
+        
+    
+    
+    
 
-    
-    
-    
-    
-    
 
 
 
@@ -102,11 +102,10 @@ if __name__ == '__main__':
         
         for data in csv_obj:
             csv_data_list.append({"question":data["ques"], "options":[data["opt_1"], data["opt_2"], data["opt_3"], data["opt_4"]], "answer":data["ans"]})
-            
-            
-    print(type(csv_data_list))
-    
-    
+      
+      
+      
+      
+      
+      
     display_ques(csv_data_list)
-                                  
-                                   

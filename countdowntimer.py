@@ -26,24 +26,24 @@
 
 
 
-def print_msg_box(msg : str, index : int):
-    '''
-    Print message with box
-    '''
-    padding = 1
-    space = " " * padding
-    title = f"Question {index}"
-    lines = msg.split("\n")
-    length = max(map(len, lines))
+# def print_msg_box(msg : str, index : int):
+#     '''
+#     Print message with box
+#     '''
+#     padding = 1
+#     space = " " * padding
+#     title = f"Question {index}"
+#     lines = msg.split("\n")
+#     length = max(map(len, lines))
     
-    box = f"╔{'═'*(length + padding * 2)}╗\n" # top border
-    box += f"║{space}\033[1m{title:<{length}}\033[0m{space}║\n" # title
-    box += f'║{space}{"-" * len(title):<{length}}{space}║\n'  # title underscore
-    box += "".join([f"║{space}{line:<{length}}{space}║\n" for line in lines]) # content
-    box += f"╚{'═'*(length + padding * 2)}╝\n" # bottom border
-    print(box)
+#     box = f"╔{'═'*(length + padding * 2)}╗\n" # top border
+#     box += f"║{space}\033[1m{title:<{length}}\033[0m{space}║\n" # title
+#     box += f'║{space}{"-" * len(title):<{length}}{space}║\n'  # title underscore
+#     box += "".join([f"║{space}{line:<{length}}{space}║\n" for line in lines]) # content
+#     box += f"╚{'═'*(length + padding * 2)}╝\n" # bottom border
+#     print(box)
      
-print_msg_box("What is your name harrr?\nHEHEBOI\nhuehuehue", 1)
+# print_msg_box("What is your name harrr?\nHEHEBOI\nhuehuehue", 1)
 
 
     
@@ -55,4 +55,15 @@ print_msg_box("What is your name harrr?\nHEHEBOI\nhuehuehue", 1)
     
     
     
+
+a = "chicken"
+b = "little"
+
+print("Hello" + " " +  a + " " + b)
+
+print("Hello {0} {1}".format(a, b))
+
+print(f"Hello {a} {b}")
+
+
 
